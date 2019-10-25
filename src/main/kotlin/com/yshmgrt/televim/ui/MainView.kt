@@ -11,5 +11,10 @@ class MainView : View() {
                 }
             }
         }
+        bottom {
+            vbox {
+                this += StatusView()
+            }
+        }
    }
 }
