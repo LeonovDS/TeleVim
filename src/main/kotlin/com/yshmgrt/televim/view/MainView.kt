@@ -1,15 +1,11 @@
-package com.yshmgrt.televim.ui
+package com.yshmgrt.televim.view
 
 import tornadofx.*
 
 class MainView : View() {
     override val root = borderpane {
-        top {
-            vbox {
-                label {
-                    text = ":TeleVim"
-                }
-            }
+        center {
+            this += LoginView()
         }
         bottom {
             vbox {
