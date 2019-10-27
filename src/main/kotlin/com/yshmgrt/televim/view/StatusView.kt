@@ -28,11 +28,16 @@ class StatusView : View() {
             addClass(Style.sStatusText)
             addClass(Style.sStatusBar)
             setOnKeyPressed {
-                when (it.code) {
-                    KeyCode.ENTER -> controller.onCommand(text ?: "")
-                    else -> {
+                text = when (it.code) {
+                    KeyCode.ENTER -> {
+                        controller.onCommand(text ?: "")
+                        ""
                     }
-                }
+                    KeyCode.UP -> controller.getPrevCommand()
+                    KeyCode.DOWN -> controller.getNextCommand()
+                    else -> return@setOnKeyPressed
+                } ?: text
+                positionCaret(text.length)
             }
         }
         statusList.forEach {
