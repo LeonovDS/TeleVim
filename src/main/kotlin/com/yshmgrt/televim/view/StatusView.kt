@@ -2,6 +2,7 @@ package com.yshmgrt.televim.view
 
 import com.yshmgrt.televim.StateToStringConverter
 import com.yshmgrt.televim.controller.Controller
+import com.yshmgrt.televim.controller.HistoryController
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.Node
@@ -34,8 +35,8 @@ class StatusView : View() {
                         controller.onCommand(text ?: "")
                         ""
                     }
-                    KeyCode.UP -> controller.getPrevCommand()
-                    KeyCode.DOWN -> controller.getNextCommand()
+                    KeyCode.UP -> HistoryController.getPrevCommand()
+                    KeyCode.DOWN -> HistoryController.getNextCommand()
                     else -> return@setOnKeyPressed
                 } ?: text
                 positionCaret(text.length)
