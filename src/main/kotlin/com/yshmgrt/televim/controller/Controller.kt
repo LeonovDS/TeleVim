@@ -6,13 +6,12 @@ import tornadofx.*
 class Controller : tornadofx.Controller() {
 
     private val commandList = observableList<String>()
-    private var last : Int = 0
+    private var last: Int = 0
 
-    val state : ObjectProperty<State> = State.LOGIN.toProperty()
+    val state: ObjectProperty<State> = State.LOGIN.toProperty()
 
-    fun onCommand(command : String) {
-        when (command)
-        {
+    fun onCommand(command: String) {
+        when (command) {
             ":login" -> state.value = State.NULL
             else -> state.value = State.LOGIN
         }
@@ -20,7 +19,7 @@ class Controller : tornadofx.Controller() {
         last = commandList.size
     }
 
-    fun getPrevCommand() : String? {
+    fun getPrevCommand(): String? {
         if (commandList.size == 0)
             return null
         if (last == 0)
@@ -28,7 +27,7 @@ class Controller : tornadofx.Controller() {
         return commandList[--last]
     }
 
-    fun getNextCommand() : String? {
+    fun getNextCommand(): String? {
         if (commandList.size == last)
             return null
         if (commandList.size - 1 == last) {

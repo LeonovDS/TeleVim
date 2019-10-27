@@ -5,7 +5,7 @@ import tornadofx.*
 class Style : Stylesheet() {
 
     companion object {
-        val cStatusBar = c(0,0, 0)
+        val cStatusBar = c(0, 0, 0)
         val cStatusText = c(255, 255, 255)
         val cLoginBackground = c(0, 255, 255)
         val cLoginColor = c(255, 255, 255)

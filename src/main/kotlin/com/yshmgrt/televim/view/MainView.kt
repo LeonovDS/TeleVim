@@ -5,12 +5,12 @@ import tornadofx.*
 class MainView : View() {
     override val root = borderpane {
         center {
-            this += LoginView()
+            loginview { }
         }
         bottom {
             vbox {
-                this += StatusView()
+                statusview { }
             }
         }
-   }
+    }
 }

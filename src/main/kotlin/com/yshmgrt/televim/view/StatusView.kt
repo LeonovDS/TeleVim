@@ -4,6 +4,7 @@ import com.yshmgrt.televim.StateToStringConverter
 import com.yshmgrt.televim.controller.Controller
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleStringProperty
+import javafx.scene.Node
 import javafx.scene.input.KeyCode
 import javafx.scene.layout.Priority
 import tornadofx.*
@@ -46,4 +47,8 @@ class StatusView : View() {
             }
         }
     }
+}
+
+fun Node.statusview(op: StatusView.() -> Unit) {
+    this += StatusView().apply(op)
 }
