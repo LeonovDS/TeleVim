@@ -14,12 +14,15 @@ class StatusView : View() {
 
     private val controller: Controller by inject()
     private val mode = SimpleStringProperty()
+    private val status = SimpleStringProperty()
     private val statusList = listOf<Property<String>>(
+            status,
             mode,
             SimpleStringProperty(":televim")
     )
 
     init {
+        status.bindBidirectional(controller.status)
         mode.bindBidirectional(controller.state, StateToStringConverter())
     }
 

@@ -40,8 +40,8 @@ class AuthorisationRequestHandler(private val client: Client, private val getter
 }
 
 interface ValuesGetter{
-    fun getPhoneNumber():String
-    fun getCode():String
+    fun getPhoneNumber()
+    fun getCode()
     fun onReady()
 }
 
@@ -56,19 +56,28 @@ fun updateAutorizationState(newState: TdApi.AuthorizationState?, client: Client,
         is TdApi.AuthorizationStateWaitEncryptionKey -> {
             client.send(TdApi.CheckDatabaseEncryptionKey(), AuthorisationRequestHandler(client, getter))
         }
-        is TdApi.AuthorizationStateWaitPhoneNumber->{
-            client.send(TdApi.SetAuthenticationPhoneNumber(getter.getPhoneNumber(),null), AuthorisationRequestHandler(client, getter))
+        is TdApi.AuthorizationStateWaitPhoneNumber->{getter.getPhoneNumber()
+
         }
         is TdApi.AuthorizationStateWaitCode->{
-            client.send(TdApi.CheckAuthenticationCode(getter.getCode()),AuthorisationRequestHandler(client, getter))
+            getter.getCode()
         }
         is TdApi.AuthorizationStateReady->{
             getter.onReady()
         }
         else -> {
-            println(autorizationState?.constructor)
+            println(autorizationState?.toString())
         }
     }
+}
+
+
+fun sendPhone(client: Client, phone:String, getter: ValuesGetter){
+    client.send(TdApi.SetAuthenticationPhoneNumber(phone,null), AuthorisationRequestHandler(client, getter))
+}
+
+fun sendCode(client: Client, code:String, getter: ValuesGetter){
+    client.send(TdApi.CheckAuthenticationCode(code), AuthorisationRequestHandler(client, getter))
 }
 
 class UpdatesHandler(val getter: ValuesGetter): Client.ResultHandler{

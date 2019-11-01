@@ -1,16 +1,33 @@
 package com.yshmgrt.televim.model
 
-class ValGetter:ValuesGetter {
-    override fun getPhoneNumber(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+import com.yshmgrt.televim.controller.State
+import javafx.application.Platform
+import javafx.beans.property.ObjectProperty
+import javafx.beans.property.SimpleStringProperty
+import javafx.beans.property.StringProperty
+import tornadofx.toProperty
+
+
+class ValGetter(var state: ObjectProperty<State>, var status: StringProperty):ValuesGetter {
+    override fun getPhoneNumber(){
+        Platform.runLater {
+            state.value = State.ENTER_PHONE
+            status.value = "enter your phone number"
+        }
     }
 
-    override fun getCode(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getCode(){
+        Platform.runLater {
+            state.value = State.ENTER_CODE
+            status.value = "enter your code"
+        }
     }
 
     override fun onReady() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Platform.runLater{
+            state.value  = State.LOGGED_IN
+            status.value = "correctly logged in"
+        }
     }
 
 }
