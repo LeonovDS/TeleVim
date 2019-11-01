@@ -15,6 +15,7 @@ buildscript {
     }
 }
 
+
 plugins {
     id "org.openjfx.javafxplugin" version "0.0.8"
 }
@@ -45,7 +46,6 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "no.tornado:tornadofx:$tornadofx_version"
-    implementation 'com.github.ErnyTech:JTDLib:v0.1.1'
     testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:$junit_version"
 }

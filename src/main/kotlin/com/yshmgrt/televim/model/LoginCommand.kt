@@ -1,16 +1,12 @@
 package com.yshmgrt.televim.model
-import it.ernytech.tdlib.utils.ReceiveCallback
 import org.drinkless.tdlib.Client
 import org.drinkless.tdlib.TdApi
-import java.util.concurrent.atomic.AtomicLong
-import java.util.logging.Handler
 
 
 var autorizationState: TdApi.AuthorizationState? = null
-var currentQueryId = AtomicLong()
 
 //rewrite to read from config file in future
-fun createApiParameters():TdApi.TdlibParameters{
+fun createApiParameters(): TdApi.TdlibParameters{
     val parameters = TdApi.TdlibParameters()
     parameters.apiId = 919672
     parameters.apiHash = "9b85feea20823c6a28ad50d5a22ce3b0"
@@ -24,7 +20,7 @@ fun createApiParameters():TdApi.TdlibParameters{
     return parameters
 }
 
-fun updateAutorizationState(newState:TdApi.AuthorizationState, client: Client){
+fun updateAutorizationState(newState: TdApi.AuthorizationState, client: Client){
     autorizationState = newState
     when (autorizationState?.constructor){
         TdApi.AuthorizationStateWaitTdlibParameters.CONSTRUCTOR -> {
@@ -40,7 +36,7 @@ fun updateAutorizationState(newState:TdApi.AuthorizationState, client: Client){
     }
 }
 
-class UpdatesHandler:Client.ResultHandler{
+class UpdatesHandler: Client.ResultHandler{
     override fun onResult(`object`: TdApi.Object?) {
         println(`object`.toString())
     }
@@ -53,7 +49,7 @@ fun createClient(): Client {
     val client = Client.create(null, null, null)
 
     // test Client.execute
-    UpdatesHandler().onResult(Client.execute(TdApi.GetTextEntities("@telegram /test_command https://telegram.org telegram.me @gif @test")))
+    //UpdatesHandler().onResult(Client.execute(TdApi.GetTextEntities("@telegram /test_command https://telegram.org telegram.me @gif @test")))
     return client
 }
 
