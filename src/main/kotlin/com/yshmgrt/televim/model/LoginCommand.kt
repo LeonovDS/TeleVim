@@ -79,6 +79,9 @@ fun sendPhone(client: Client, phone:String, getter: ValuesGetter){
 fun sendCode(client: Client, code:String, getter: ValuesGetter){
     client.send(TdApi.CheckAuthenticationCode(code), AuthorisationRequestHandler(client, getter))
 }
+fun sendLogout(client: Client){
+    client.send(TdApi.LogOut()){}
+}
 
 class UpdatesHandler(val getter: ValuesGetter): Client.ResultHandler{
     override fun onResult(`object`: TdApi.Object?) {
