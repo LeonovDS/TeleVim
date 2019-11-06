@@ -9,6 +9,13 @@ import tornadofx.toProperty
 
 
 class ValGetter(var state: ObjectProperty<State>, var status: StringProperty):ValuesGetter {
+    override fun getRegistration() {
+        Platform.runLater {
+            state.value = State.REGISTRATION
+            status.value = "enter your first and last name in format :reg <first_name> <last_name>"
+        }
+    }
+
     override fun getPhoneNumber(){
         Platform.runLater {
             state.value = State.ENTER_PHONE

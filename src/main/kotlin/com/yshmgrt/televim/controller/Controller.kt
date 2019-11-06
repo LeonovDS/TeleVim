@@ -31,6 +31,8 @@ class Controller : tornadofx.Controller() {
             State.ENTER_CODE ->{
                 sendCode(client!!,command, ValGetter(state,status))
             }
+            State.REGISTRATION->{
+            }
             else ->{
                 when (cmd.name) {
                     "logout" -> {
@@ -54,5 +56,6 @@ enum class State {
     NULL,
     ENTER_PHONE,
     ENTER_CODE,
-    LOGGED_IN
+    LOGGED_IN,
+    REGISTRATION
 }

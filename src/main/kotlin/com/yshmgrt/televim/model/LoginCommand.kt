@@ -43,6 +43,7 @@ interface ValuesGetter{
     fun getPhoneNumber()
     fun getCode()
     fun onReady()
+    fun getRegistration()
 }
 
 fun updateAutorizationState(newState: TdApi.AuthorizationState?, client: Client, getter: ValuesGetter){
@@ -65,10 +66,17 @@ fun updateAutorizationState(newState: TdApi.AuthorizationState?, client: Client,
         is TdApi.AuthorizationStateReady->{
             getter.onReady()
         }
+        is TdApi.AuthorizationStateWaitRegistration -> {
+            getter.getRegistration()
+        }
         else -> {
-            println(autorizationState?.toString())
+            System.err.println("Login pattern not supported: $autorizationState")
         }
     }
+}
+
+fun register(client: Client, fname:String, lname:String, getter: ValuesGetter){
+    client.send(TdApi.RegisterUser(fname, lname), AuthorisationRequestHandler(client,getter))
 }
 
 
